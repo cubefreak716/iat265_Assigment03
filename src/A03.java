@@ -2,7 +2,7 @@ import processing.core.*;
 import controlP5.*;
 
 
-public class a03 extends PApplet{
+public class A03 extends PApplet{
 	
 	Gear g1;
 	Gear g2;
@@ -14,7 +14,7 @@ public class a03 extends PApplet{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PApplet.main("a03");
+		PApplet.main("A03");
 	}
 
     public void settings(){
