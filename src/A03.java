@@ -1,87 +1,63 @@
 import processing.core.*;
-public class A03 extends PApplet{
+import controlP5.*;
 
-	Wheel[] wheels = new Wheel[2];
+
+public class a03 extends PApplet{
 	
-	Wheel w1, w2;
-	Belt b1, b2;
-	
-	Wheel w3,w4;
-	Belt b3,b4;
-	
-	Wheel w5,w6;
-	Belt b5,b6;
-	
+	Gear g1;
+	Gear g2;
+	Gear g3; 
+	float angle;
+	float x1,x2,x3,x4;
+	float y1,y2,y3,y4;
+	UIHelper u; 
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PApplet.main("Lab08");
+		PApplet.main("a03");
 	}
 
-	public void settings() {
-		size(800,800);
-	}
-	
-	public void setup() {
-		
-//		for(int i = 0; i<wheels.length; i++) {
-//			wheels[i] = new Wheel(this, random(10+200,width-200),height/2,100);
-//		}
-		
-//		w1 = new Wheel(this, 200, 100 , 100);
-//		w2 = new Wheel(this, 500, 100, 100);
-//		b1 = new Belt(this,w1.posX, w1.posY-w1.r/2, w2.posX, w2.posY-w2.r/2);
-//		b2 = new Belt(this,w1.posX, w1.posY+w1.r/2, w2.posX, w2.posY+w2.r/2);
-		
-		w3 = new Wheel(this,200,300,100);
-		w4 = new Wheel(this,500,300,100);
-		b3 = new Belt(this,w3.posX, w3.posY-w3.r/2, w4.posX, w4.posY-w4.r/2);
-		b4 = new Belt(this,w3.posX, w3.posY+w3.r/2, w4.posX, w4.posY+w4.r/2);
-		
-		w5 = new Wheel(this,200,525,170);
-		w6 = new Wheel(this,500,500,70);
-		b5 = new Belt(this,w5.posX, w5.posY-w5.r/2, w6.posX, w6.posY-w6.r/2);
-		b6 = new Belt(this,w5.posX, w5.posY+w5.r/2, w6.posX, w6.posY+w6.r/2);
-	}
-	
-	public void draw() {
-		background(255);
-		
-//		for(int i = 0; i<wheels.length; i++) {
-//			wheels[i].drawMe();
-//		}
-//		
-//		w1.drawMe();
-//		w2.drawMe();
-//		b1.drawMe();
-//		b2.drawMe();
-		
-		w3.drawMe();
-		w4.drawMe();
-		
-		drawBelt(w3,w4);
-		
-		b3.drawMe();
-		b4.drawMe();
-		
-		w5.drawMe();
-		w6.drawMe();
-		b5.drawMe();
-		b6.drawMe();
-		
-	}
-	
-	public void drawBelt(Wheel W1, Wheel W2) {
-		
-		float theta = atan(W2.posY - W1.posY)/(W2.posX-W1.posX);
-		
-//		println(theta);
-//		pushStyle();
-//		strokeWeight(10);
-//		point(W1.posX + W1.r*sin(theta), W1.posY +W1.r*cos(theta));
-//		popStyle();
-		
-		
-	
-	}
-	
+    public void settings(){
+    	size(800,800);
+    }
+
+    public void setup(){
+    	g1 = new Gear(this, width/4, height/2);
+    	g2 = new Gear(this, 3*width/4, height/2-200);
+    	g3 = new Gear(this, 300, 200);
+    }
+
+    public void draw(){
+    	background(255);
+    	pushStyle();
+    	stroke(2);
+    	rect(0,0,width/8, height);
+    	popStyle();
+    	g1.drawMe();
+    	g2.drawMe();
+    	g3.drawMe();
+    	drawBelt(g1,g2);
+    	drawBelt(g1, g3);
+    }
+    
+    public void drawBelt(Gear G1, Gear G2) {
+    	angle = atan((G1.yPos-G2.yPos)/(G1.xPos-G2.xPos));
+    	x1 = G1.xPos+50*sin(angle);
+    	x2 = G1.xPos-50*sin(angle);
+    	y1 = G1.yPos-50*cos(angle);
+    	y2 = G1.yPos+50*cos(angle);
+    	
+    	x3 = G2.xPos+50*sin(angle);
+    	x4 = G2.xPos-50*sin(angle);
+    	y3 = G2.yPos-50*cos(angle);
+    	y4 = G2.yPos+50*cos(angle);
+    	
+    	line(x1,y1,x3,y3);
+    	line(x2,y2,x4,y4);
+    }
+    
+    public void mousePressed() {
+    	println("hi");
+    }
+    
 }
