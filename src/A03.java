@@ -66,7 +66,7 @@ public class A03 extends PApplet{
     	}
     	else{ //g1 is ro and g2 is r1
     		
-    		if(G1.radius<G2.radius) {
+    		if(G1.radius<G2.radius) { //swap if g2>g1
     			Gear temp = G2;
     			G2 = G1;
     			G1 = temp;
