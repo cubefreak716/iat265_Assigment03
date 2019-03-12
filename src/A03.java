@@ -28,7 +28,7 @@ public class A03 extends PApplet{
     	g1 = new Gear(this, width/4, height/2,50);
     	g2 = new Gear(this, 3*width/4, height/2-200,200);
     	g3 = new Gear(this, 300, 200,100);
-    	g4 = new Gear(this, 500, 600, 30);
+    	g4 = new Gear(this, mouseX, 600, 30);
     }
 
     public void draw(){
@@ -41,6 +41,8 @@ public class A03 extends PApplet{
     	g2.drawMe();
     	g3.drawMe();
     	g4.drawMe();
+    	g4.xPos = mouseX;
+    	g4.yPos = mouseY;
     	drawBelt(g1,g2);
     	drawBelt(g1, g3);
     	drawBelt(g4,g1);
@@ -80,9 +82,9 @@ public class A03 extends PApplet{
         	float yF1 = ((pow(G1.radius,2) * (yP-G1.yPos) - (G1.radius*(xP-G1.xPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.yPos;
         	float yF2 = ((pow(G1.radius,2) * (yP-G1.yPos) + (G1.radius*(xP-G1.xPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.yPos;
         	
-        	float check = ((G1.yPos-yF1)*(yP-yF1))/((xF1-G1.xPos)-(xF1-xP));
-        	float check1= ((G1.yPos-yF2)*(yP-yF2))/((xF2-G1.xPos)-(xF2-xP));
-        	println(check1);
+//        	float check = ((G1.yPos-yF1)*(yP-yF1))/((xF1-G1.xPos)-(xF1-xP));
+//        	float check1= ((G1.yPos-yF2)*(yP-yF2))/((xF2-G1.xPos)-(xF2-xP));
+        	//println(check1);
         	
         	float xF3 = ((pow(G2.radius,2) * (xP-G2.xPos) + (G2.radius*(yP-G2.yPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.xPos;
         	float xF4 = ((pow(G2.radius,2) * (xP-G2.xPos) - (G2.radius*(yP-G2.yPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.xPos;
