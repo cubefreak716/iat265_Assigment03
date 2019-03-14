@@ -8,13 +8,14 @@ public class A03 extends PApplet{
 	Gear g2;
 	Gear g3; 
 	Gear g4;
+	Gear g5; 
 	float angle;
 	float x1,x2,x3,x4;
 	float y1,y2,y3,y4;
 	ControlP5 cp5;
 	float xP, yP;
 	Slider rSlider;
-	Button addGear;
+	Button clearGear;
 	
 
 	public static void main(String[] args) {
@@ -31,7 +32,8 @@ public class A03 extends PApplet{
     	g1 = new Gear(this, width/2, height/2,50);
     	g2 = new Gear(this, 300+width/2, height/2-200,30);
     	g3 = new Gear(this, 300, 200,100);
-    	g4 = new Gear(this, mouseX, 600, 30);
+    	g4 = new Gear(this, 360, 600, 30);
+    	g5 = new Gear(this, 400, 670, 20); 
     	initUI();
     }
 
@@ -42,14 +44,16 @@ public class A03 extends PApplet{
     	rect(0,0,200, height);
     	popStyle();
     	g1.drawMe();
-//    	g2.drawMe();
+    	g2.drawMe();
     	g3.drawMe();
-//    	g4.drawMe();
-//    	g4.xPos = mouseX;
-//    	g4.yPos = mouseY;
-//    	drawBelt(g1,g2);
+    	g4.drawMe();
+    	g5.drawMe();
+    	g4.xPos = mouseX;
+    	g4.yPos = mouseY;
+    	drawBelt(g1,g2);
     	drawBelt(g1, g3);
-//    	drawBelt(g4,g1);
+    	drawBelt(g4,g1);
+    	drawBelt(g5,g4);
     	
     }
     
@@ -97,7 +101,7 @@ public class A03 extends PApplet{
         	float yF4 = ((pow(G2.radius,2) * (yP-G2.yPos) + (G2.radius*(xP-G2.xPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.yPos;
         	        	
         	pushStyle();
-        	strokeWeight(3);
+        	strokeWeight(1);
         	point(xP,yP);
         	line(xF1,yF1,xF3,yF3);
         	line(xF2,yF2,xF4,yF4);        	
@@ -133,7 +137,7 @@ public class A03 extends PApplet{
     
     void initUI() {
     	 rSlider = createSlider("radius", "Radius", 80, 50, 0, 255);
-    	 addGear = createButton("add","Add", 20,100);
+    	 clearGear = createButton("clear","Clear", 20,100);
     }
         
     public void mousePressed() {
