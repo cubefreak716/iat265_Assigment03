@@ -9,12 +9,14 @@ public class A03 extends PApplet{
 	Gear g3; 
 	Gear g4;
 	Gear g5; 
-	float angle;
-	float x1,x2,x3,x4;
-	float y1,y2,y3,y4;
+	
+	Gear rrr; 
+	Gear selected; 
 	ControlP5 cp5;
-	float xP, yP;
-	Slider rSlider;
+
+	Slider sizeSlider, strSlider;
+	Slider rSlider,gSlider, bSlider;
+	Slider xSlider, ySlider;
 	Button clearGear;
 	
 
@@ -29,85 +31,33 @@ public class A03 extends PApplet{
 
     public void setup(){
     	cp5 = new ControlP5(this);
-    	g1 = new Gear(this, width/2, height/2,50);
-    	g2 = new Gear(this, 300+width/2, height/2-200,30);
-    	g3 = new Gear(this, 300, 200,100);
-    	g4 = new Gear(this, 360, 600, 30);
-    	g5 = new Gear(this, 400, 670, 20); 
+//    	g1 = new Gear(this, width/2, height/2,50);
+//    	g2 = new Gear(this, 300+width/2, height/2-200,30);
+//    	g3 = new Gear(this, 300, 200,100);
+//    	g4 = new Gear(this, 360, 600, 30);
+//    	g5 = new Gear(this, 400, 670, 20); 
+    	
+    	rrr = new Gear(this, 340, 200, 40, 0);
+    	
     	initUI();
     }
 
     public void draw(){
     	background(255);
+    	
+    	rrr.drawMe();
+    	
     	pushStyle();
-    	stroke(2);
+    	strokeWeight(2);
     	rect(0,0,200, height);
+    	//starting gear point test
+    	point (340,200); 
     	popStyle();
-    	g1.drawMe();
-    	g2.drawMe();
-    	g3.drawMe();
-    	g4.drawMe();
-    	g5.drawMe();
-    	g4.xPos = mouseX;
-    	g4.yPos = mouseY;
-    	drawBelt(g1,g2);
-    	drawBelt(g1, g3);
-    	drawBelt(g4,g1);
-    	drawBelt(g5,g4);
     	
-    }
+    	
+    }//end of draw
     
-    public void drawBelt(Gear G1, Gear G2) {
-    	
-    	//both radius is the same
-    	if(G1.radius==G2.radius) {    	
-	    	angle = atan((G1.yPos-G2.yPos)/(G1.xPos-G2.xPos));
-	    	x1 = G1.xPos+G1.radius*sin(angle);
-	    	x2 = G1.xPos-G1.radius*sin(angle);
-	    	y1 = G1.yPos-G1.radius*cos(angle);
-	    	y2 = G1.yPos+G1.radius*cos(angle);
-	    	
-	    	x3 = G2.xPos+G2.radius*sin(angle);
-	    	x4 = G2.xPos-G2.radius*sin(angle);
-	    	y3 = G2.yPos-G2.radius*cos(angle);
-	    	y4 = G2.yPos+G2.radius*cos(angle);
-	    	
-	    	line(x1,y1,x3,y3);
-	    	line(x2,y2,x4,y4);
-    	}
-    	else{ //g1 is ro and g2 is r1
-    		
-    		if(G1.radius<G2.radius) { //swap if g2>g1
-    			Gear temp = G2;
-    			G2 = G1;
-    			G1 = temp;
-    		}
-    		//find intersection point
-    		xP = (G2.xPos*G1.radius - G1.xPos*G2.radius)/(G1.radius-G2.radius);
-    		yP = (G2.yPos*G1.radius - G1.yPos*G2.radius)/(G1.radius-G2.radius);
-    		
-    		float xF1 = ((pow(G1.radius,2) * (xP-G1.xPos) + (G1.radius*(yP-G1.yPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.xPos;
-        	float xF2 = ((pow(G1.radius,2) * (xP-G1.xPos) - (G1.radius*(yP-G1.yPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.xPos;
-        	float yF1 = ((pow(G1.radius,2) * (yP-G1.yPos) - (G1.radius*(xP-G1.xPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.yPos;
-        	float yF2 = ((pow(G1.radius,2) * (yP-G1.yPos) + (G1.radius*(xP-G1.xPos)) * sqrt(pow((xP-G1.xPos),2) + pow((yP-G1.yPos),2)-pow(G1.radius,2)))/(pow(xP-G1.xPos,2) + pow(yP-G1.yPos,2))) + G1.yPos;
-        	
-//        	float check = ((G1.yPos-yF1)*(yP-yF1))/((xF1-G1.xPos)-(xF1-xP));
-//        	float check1= ((G1.yPos-yF2)*(yP-yF2))/((xF2-G1.xPos)-(xF2-xP));
-        	//println(check1);
-        	
-        	float xF3 = ((pow(G2.radius,2) * (xP-G2.xPos) + (G2.radius*(yP-G2.yPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.xPos;
-        	float xF4 = ((pow(G2.radius,2) * (xP-G2.xPos) - (G2.radius*(yP-G2.yPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.xPos;
-        	float yF3 = ((pow(G2.radius,2) * (yP-G2.yPos) - (G2.radius*(xP-G2.xPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.yPos;
-        	float yF4 = ((pow(G2.radius,2) * (yP-G2.yPos) + (G2.radius*(xP-G2.xPos)) * sqrt(pow((xP-G2.xPos),2) + pow((yP-G2.yPos),2)-pow(G2.radius,2)))/(pow(xP-G2.xPos,2) + pow(yP-G2.yPos,2))) + G2.yPos;
-        	        	
-        	pushStyle();
-        	strokeWeight(1);
-        	point(xP,yP);
-        	line(xF1,yF1,xF3,yF3);
-        	line(xF2,yF2,xF4,yF4);        	
-        	popStyle();
-    	}
-    }
+
     
     void styleCaptionLabel(Label l) {
     	  PFont font = createFont("arial", 16);
@@ -135,13 +85,73 @@ public class A03 extends PApplet{
     	  return b;
     }
     
-    void initUI() {
-    	 rSlider = createSlider("radius", "Radius", 80, 50, 0, 255);
-    	 clearGear = createButton("clear","Clear", 20,100);
+    public void initUI() {
+    	 sizeSlider = createSlider("radius", "Radius", 80, 50, 10, 100);
+    	 rSlider = createSlider("red", "Red", 80, 100, 0, 255); 
+    	 gSlider = createSlider("green", "Green", 80, 120, 0, 255);
+    	 bSlider = createSlider("blue", "Blue", 80, 140, 0, 255);
+    	 xSlider = createSlider("xposition", "X Pos", 80,170,200, width);
+    	 ySlider = createSlider("yposition", "Y Pos", 80,190,0, height);
+    	 strSlider = createSlider("strokeS", "Weight", 80,30,1, 5); 
+    	 clearGear = createButton("save","Save", 20,700);
     }
-        
+    
+    public void strokeS(float sW) {
+    	if(selected != null) {
+    		selected.sw = sW; 
+    	}
+    }
+    
+    public void radius(float ra) {
+    	if(selected != null) {
+    		selected.radius = ra;
+    	}
+    }
+    
+    public void red(float r) {
+	  if (selected != null) {
+	    selected.cou = color(r, green(selected.cou), blue(selected.cou));
+	  }
+    }
+    public void green(float g) {
+	  if (selected != null) {
+	    selected.cou = color(red(selected.cou), g, blue(selected.cou));
+	  }
+    }
+    public void blue(float b) {
+	  if (selected != null) {
+	    selected.cou = color(red(selected.cou), green(selected.cou), b);
+	  }
+    }
+    
+    public void xposition(float x) {
+    	if(selected!= null) {
+    		selected.xPos = x;
+    	}
+    }
+    public void yposition(float y) {
+    	if(selected!=null) {
+    		selected.yPos = y;
+    	}
+    }
+    
+    public void save() {
+    	save("image.jpg");
+    }
+    
     public void mousePressed() {
-    	println("hi");
+    	if(mouseX>200) {
+    		selected = rrr.pickMe(mouseX, mouseY);
+    		if(selected != null) {
+    			strSlider.setValue(selected.sw);
+    			sizeSlider.setValue(selected.radius);
+    			rSlider.setValue(red(selected.cou));
+    			gSlider.setValue(green(selected.cou));
+    			bSlider.setValue(blue(selected.cou));
+    			xSlider.setValue(selected.xPos);
+    			ySlider.setValue(selected.yPos);
+    		}
+    	}
     }
     
 }
