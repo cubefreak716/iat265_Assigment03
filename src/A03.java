@@ -30,30 +30,22 @@ public class A03 extends PApplet{
     }
 
     public void setup(){
-    	cp5 = new ControlP5(this);
-//    	g1 = new Gear(this, width/2, height/2,50);
-//    	g2 = new Gear(this, 300+width/2, height/2-200,30);
-//    	g3 = new Gear(this, 300, 200,100);
-//    	g4 = new Gear(this, 360, 600, 30);
-//    	g5 = new Gear(this, 400, 670, 20); 
-    	
+    	cp5 = new ControlP5(this);    	
     	rrr = new Gear(this, 340, 200, 40, 1);
-    	
     	initUI();
     }
 
     public void draw(){
     	background(255);
     	
-    	rrr.drawMe();
+    	//draw gears
+    	rrr.drawMe(); 
     	
+    	//draw side bar
     	pushStyle();
     	strokeWeight(2);
     	rect(0,0,200, height);
-    	//starting gear point test
-    	point (340,200); 
-    	popStyle();
-    	
+    	popStyle();   	
     	
     }//end of draw
     

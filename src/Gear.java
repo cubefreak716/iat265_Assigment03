@@ -8,8 +8,6 @@ public class Gear extends PApplet{
 	PVector pos, end; 	
 	
 	float radius; 
-	Gear recGear;
-	Gear temp;
 	Gear left, right;
 	Belt b; 
 	int cou; 
