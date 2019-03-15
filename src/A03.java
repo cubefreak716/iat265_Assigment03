@@ -37,7 +37,7 @@ public class A03 extends PApplet{
 //    	g4 = new Gear(this, 360, 600, 30);
 //    	g5 = new Gear(this, 400, 670, 20); 
     	
-    	rrr = new Gear(this, 340, 200, 40, 0);
+    	rrr = new Gear(this, 340, 200, 40, 1);
     	
     	initUI();
     }
