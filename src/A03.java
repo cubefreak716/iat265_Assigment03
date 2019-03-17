@@ -4,11 +4,11 @@ import controlP5.*;
 
 public class A03 extends PApplet{
 	
-	Gear g1;
-	Gear g2;
-	Gear g3; 
-	Gear g4;
-	Gear g5; 
+//	Gear g1;
+//	Gear g2;
+//	Gear g3; 
+//	Gear g4;
+//	Gear g5; 
 	
 	Gear rrr; 
 	Gear selected; 
